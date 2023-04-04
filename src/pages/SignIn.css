@@ -1,0 +1,60 @@
+.contentWrap {
+  /* background-color: skyblue; */
+}
+
+.contentName {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #272727;
+}
+
+.content {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.inputTitle {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #272727;
+  margin: 10px 0;
+}
+
+input {
+  height: 30px;
+  border-radius: 2px;
+  margin: 8px 0;
+  padding: 8px;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  border: #272727;
+}
+
+input::placeholder {
+  color: #d3d3d3;
+}
+
+.errorMessage {
+  margin: 2px 10px 10px 10px;
+  color: #ef0000;
+  font-size: 12px;
+}
+
+button {
+  margin-top: 15px;
+  height: 50px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: #003153;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #dadada;
+  color: white;
+}
