@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./SignIn.css";
 
@@ -29,7 +30,7 @@ const SignIn = () => {
   const onChangePassword = (event) => {
     setPaassword(event.target.value);
 
-    const regexPassword = /^[\w]{8,}/; // 8자리 이상인지를 검사하기 위한 정규식
+    const regexPassword = /[\w]{7,}$/; // 8자리 이상인지를 검사하기 위한 정규식
 
     if (regexPassword.test(password)) setValidPassword(true);
     else setValidPassword(false);
@@ -62,7 +63,7 @@ const SignIn = () => {
           className="inputPassword"
           name="password"
           type="password"
-          placeholder="8자리 이상"
+          placeholder="비밀번호는 8자리 이상입니다."
           defaultValue={password}
           onChange={onChangePassword}
           data-testid="password-input"
@@ -79,8 +80,19 @@ const SignIn = () => {
           disabled={isDisableButton}
           data-testid="signin-button"
         >
-          확인
+          로그인
         </button>
+
+        <span className="or">
+          <hr />
+          <span>OR</span>
+          <hr />
+        </span>
+
+        {/* SignUp Button */}
+        <Link to="/signup">
+          <button>Sign up</button>
+        </Link>
       </div>
     </div>
   );
