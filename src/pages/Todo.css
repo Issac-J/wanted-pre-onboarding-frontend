@@ -1,0 +1,24 @@
+.todoWrapper {
+  background-color: tan;
+  display: grid;
+  place-items: center;
+}
+
+.todoTitle {
+}
+
+.inputItemForm {
+  display: flex;
+  justify-content: center;
+}
+
+.itemListContainer {
+}
+
+.item {
+  display: flex;
+}
+
+.itemButton {
+  margin: 0 0.15rem;
+}

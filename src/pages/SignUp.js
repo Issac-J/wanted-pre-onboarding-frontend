@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import axios from "axios";
 
 import "./SignUp.css";
 
@@ -11,6 +13,8 @@ const SignUp = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [isDisableButton, setDisableButton] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (validEmail && validPassword) setDisableButton(false);
@@ -36,8 +40,23 @@ const SignUp = () => {
     else setValidPassword(false);
   };
 
+  const onSubmitSignup = (event) => {
+    event.preventDefault();
+    axios({
+      url: "/signup",
+      method: "post",
+      baseURL: "https://www.pre-onboarding-selection-task.shop/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { email, password },
+    }).then(() => {
+      navigate("/signin");
+    });
+  };
+
   return (
-    <div className="contentWrap">
+    <form className="contentWrap" onSubmit={onSubmitSignup}>
       <div className="contentName">회원가입을 해주세요</div>
 
       {/* Email */}
@@ -94,7 +113,7 @@ const SignUp = () => {
           <button>Sign in</button>
         </Link>
       </div>
-    </div>
+    </form>
   );
 };
 

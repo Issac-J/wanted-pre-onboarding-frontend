@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import axios from "axios";
 
 import "./SignIn.css";
 
@@ -11,6 +13,8 @@ const SignIn = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [isDisableButton, setDisableButton] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (validEmail && validPassword) setDisableButton(false);
@@ -36,9 +40,26 @@ const SignIn = () => {
     else setValidPassword(false);
   };
 
+  const onSubmitSignIn = (event) => {
+    event.preventDefault();
+    axios({
+      url: "/signin",
+      method: "post",
+      baseURL: "https://www.pre-onboarding-selection-task.shop/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { email, password },
+    }).then((res) => {
+      const access_token = res.data.access_token;
+      localStorage.setItem("access_token", access_token);
+      navigate("/todo");
+    });
+  };
+
   return (
-    <div className="contentWrap">
-      <div className="contentName">이메일과 비밀번호를 입력해주세요</div>
+    <form className="contentWrap" onSubmit={onSubmitSignIn}>
+      <div className="contentName">로그인을 해주세요</div>
 
       {/* Email */}
       <div className="content">
@@ -91,10 +112,10 @@ const SignIn = () => {
 
         {/* SignUp Button */}
         <Link to="/signup">
-          <button>Sign up</button>
+          <button>회원가입</button>
         </Link>
       </div>
-    </div>
+    </form>
   );
 };
 
